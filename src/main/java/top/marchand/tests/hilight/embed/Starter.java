@@ -34,9 +34,11 @@ public class Starter {
                             JS, 
                             new InputStreamReader(url.openStream()),
                             "highlight.min.js").build());
-            Value entryPoint = context.getBindings(JS).getMember("highlight");
-            Value ret = entryPoint.execute("xml", "<test>contenu</test>");
-            System.out.println(ret.asString());
+            Value obj = context.getBindings(JS).getMember("hljs");
+            Value function = obj.getMember("highlight");
+            System.out.println(function);
+            Value ret = function.execute("xml", "<test>contenu</test>");
+            System.out.println(ret.getMember("value").asString());
         }
     }
 }
